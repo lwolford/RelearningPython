@@ -1,5 +1,3 @@
-import time
-
 import customtkinter as ctk
 import tkinter as tk
 from jankenpo import jankenpo_logic
@@ -7,6 +5,7 @@ from PIL import Image
 
 ctk.set_appearance_mode("Dark")
 ctk.set_default_color_theme("dark-blue")
+
 
 class rpsgui:
     def __init__(self):
@@ -17,21 +16,34 @@ class rpsgui:
         self.root.geometry("600x350")
         self.root.resizable(False, False)
 
-        self.frame = ctk.CTkFrame(master=self.root)
+        self.frame = ctk.CTkFrame(master=self.root, fg_color="#FF6961")
         self.frame.pack(pady=20, padx=20, fill="both", expand=True)
 
         self.label = ctk.CTkLabel(master=self.frame, text="Tester")
         self.label.pack(pady=12, padx=10)
 
-        rock_image = ctk.CTkImage(light_image=Image.open("Rock.png"), dark_image=Image.open("Rock.png"), size=(100, 100))
-        paper_image = ctk.CTkImage(light_image=Image.open("Notebook Paper.png"), dark_image=Image.open("Notebook Paper.png"), size=(71, 100))
-        scissors_image = ctk.CTkImage(light_image=Image.open("Scissors.png"), dark_image=Image.open("Scissors.png"), size=(100, 100))
+        rock_image = ctk.CTkImage(light_image=Image.open("Rock.png"), dark_image=Image.open("Rock.png"),
+                                  size=(100, 100))
+        paper_image = ctk.CTkImage(light_image=Image.open("Notebook Paper.png"),
+                                   dark_image=Image.open("Notebook Paper.png"), size=(71, 100))
+        scissors_image = ctk.CTkImage(light_image=Image.open("Scissors.png"), dark_image=Image.open("Scissors.png"),
+                                      size=(100, 100))
 
-        self.rock_button = ctk.CTkButton(master=self.frame, text="", image=rock_image, width=100, height=100, command=self.rock)
-        self.paper_button = ctk.CTkButton(master=self.frame, text="", image=paper_image, width=100, height=100, command=self.paper)
-        self.scissors_button = ctk.CTkButton(master=self.frame, text="", image=scissors_image, width=100, height=100, command=self.scissors)
+        self.rock_button = ctk.CTkButton(master=self.frame, text="", image=rock_image, fg_color="transparent",
+                                         hover_color="#C9A9A6", width=100, height=100, command=self.rock)
+        self.paper_button = ctk.CTkButton(master=self.frame, text="", image=paper_image, fg_color="transparent",
+                                          width=100, height=100, command=self.paper)
+        self.scissors_button = ctk.CTkButton(master=self.frame, text="", image=scissors_image, fg_color="transparent",
+                                             width=100, height=100, command=self.scissors)
 
         self.showButtons()
+
+    def update(self):
+        self.root.update()
+        self.frame.update()
+        self.rock_button.update()
+        self.paper_button.update()
+        self.scissors_button.update()
 
     def hideButtons(self):
         self.rock_button.place_forget()
@@ -62,6 +74,7 @@ class rpsgui:
         self.gui_reset(self.jankenpo.play_round("scissors"))
 
     def run(self):
+        self.update()
         self.root.mainloop()
 
 
