@@ -5,26 +5,26 @@ class jankenpo_logic:
     def __init__(self):
         self.user_wins = 0
         self.comp_wins = 0
+        self.comp_choice = ""
         self.options = ["rock", "paper", "scissors"]
 
     def play_round(self, user_choice):
-        comp_choice = self.options[random.randint(0, 2)]
+        self.comp_choice = self.options[random.randint(0, 2)]
 
-        if user_choice == "rock" and comp_choice == "scissors":
+        if user_choice == "rock" and self.comp_choice == "scissors":
             self.user_wins += 1
-            return "You won round " + str(self.user_wins + self.comp_wins) + "."
-        elif user_choice == "scissors" and comp_choice == "paper":
+            return "won"
+        elif user_choice == "scissors" and self.comp_choice == "paper":
             self.user_wins += 1
-            return "You won round " + str(self.user_wins + self.comp_wins) + "."
-        elif user_choice == "paper" and comp_choice == "rock":
+            return "won"
+        elif user_choice == "paper" and self.comp_choice == "rock":
             self.user_wins += 1
-            return "You won round " + str(self.user_wins + self.comp_wins) + "."
-        elif user_choice == comp_choice:
-            return "There was a tie. Pretend this round didn't happen."
+            return "won"
+        elif user_choice == self.comp_choice:
+            return "tie"
         else:
             self.comp_wins += 1
-            #print("The computer won round", str(self.user_wins + self.comp_wins) + ".")
-            return "The computer won round " + str(self.user_wins + self.comp_wins) + "."
+            return "loss"
 
         #if self.user_wins > self.comp_wins:
         #    print("You won! Thanks for playing!")
@@ -36,3 +36,6 @@ class jankenpo_logic:
 
     def getComputerWins(self):
         return self.comp_wins
+
+    def getCompChoice(self):
+        return self.comp_choice
